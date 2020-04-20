@@ -69,11 +69,5 @@
       "allow-contrib": false,
       "require": "5.0.*"
     }
-  },
-  "repositories": [
-    {
-      "type": "path",
-      "url": "../made-documentation-bundle"
-    }
-  ]
+  }
 }
