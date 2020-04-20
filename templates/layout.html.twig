@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} - Made Documentation{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+
+    <style type="text/css">
+        body {
+            padding-top: 5rem;
+        }
+
+        .template-navigation {
+        }
+
+        .template-content {
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="{{ root.link }}">
+            Made Documentation
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ root.link }}">
+                        Documentation <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/made/documentation" target="_blank">GitHub</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="template-navigation mb-3">
+                    {% block navigation %}
+                        {% import 'macro/navigation.html.twig' as navigation %}
+
+                        <div class="border">
+                            {% if other_version_list is not empty %}
+                                <div class="p-3 border-bottom">
+                                    <p>Other versions of this page:</p>
+
+                                    {{ navigation.show(page, other_version_list) }}
+                                </div>
+                            {% endif %}
+                            <div class="p-3">
+                                {{ navigation.show(page, [
+                                    root,
+                                ], true) }}
+                            </div>
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="col-12 col-md-8">
+                <div class="template-content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {# TODO: Footer #}
+{% endblock %}

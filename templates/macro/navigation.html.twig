@@ -1,0 +1,23 @@
+{% macro show(current, pageList, recursive = false) %}
+    <ul>
+        {% for page in pageList %}
+            <li>
+                {% if page.link == current.link %}
+                    {{ page.title }}
+                {% else %}
+                    <a href="{{ page.link }}">
+                        {{ page.title }}
+                    </a>
+                {% endif %}
+
+                {#({{ page.link }} <> {{ current.link }})#}
+
+                {% if recursive and page.childPageList is not empty %}
+                    {% import _self as self %}
+
+                    {{ self.show(current, page.childPageList, recursive) }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
