@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} - Made Documentation{% endblock %}
+
+{% block body %}
+    {% block header %}
+        <header class="border-bottom">
+            <nav class="navbar navbar-expand-md navbar-light bg-light">
+                <a class="navbar-brand" href="{{ root.link }}">
+                    Made Documentation
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ root.link }}">
+                                Documentation <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/made/documentation" target="_blank">GitHub</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+    {% endblock %}
+
+    {% block main %}
+        <div id="main" class="py-3">
+            <main role="main" class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="template-navigation bg-light mb-3 mb-md-0">
+                            {% block navigation %}
+                                {% import 'macro/navigation.html.twig' as navigation %}
+
+                                <div class="border">
+                                    {% if other_version_list is not empty %}
+                                        <div class="p-3 border-bottom">
+                                            <p>Other versions of this page:</p>
+
+                                            {{ navigation.show(page, other_version_list) }}
+                                        </div>
+                                    {% endif %}
+                                    <div class="p-3">
+                                        <p>Full page tree:</p>
+
+                                        {{ navigation.show(page, [
+                                            root,
+                                        ], true) }}
+                                    </div>
+                                    <div class="p-3 border-top">
+                                        This page was generated on {{ date|date('F d, Y') }}.
+                                    </div>
+                                </div>
+                            {% endblock %}
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-8">
+                        <div class="template-content">
+                            {% block content %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    {% endblock %}
+
+    {% block footer %}
+        <footer class="bg-light border-top py-3">
+            <div class="container">
+                <div class="float-right">
+                    <a href="#main">Back to top</a>
+                </div>
+
+                <div>© {{ date|date('Y') }} Made</div>
+            </div>
+        </footer>
+    {% endblock %}
+{% endblock %}

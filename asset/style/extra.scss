@@ -16,4 +16,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// TODO: Override variables.
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  min-height: 100%;
+}
+
+.template-navigation {
+}
+
+.template-content {
+}
+
+#main {
+  min-height: 100vh;
+}

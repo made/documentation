@@ -24,3 +24,6 @@
 
 /public/asset/*
 !/public/asset/.gitignore
+
+/public/documentation/*
+!/public/documentation/.gitignore
