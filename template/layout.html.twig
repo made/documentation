@@ -32,7 +32,7 @@
     {% endblock %}
 
     {% block main %}
-        <div id="main" class="py-3">
+        <div id="main" class="position-relative py-3">
             <main role="main" class="container">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-4">
@@ -40,25 +40,55 @@
                             {% block navigation %}
                                 {% import 'macro/navigation.html.twig' as navigation %}
 
-                                <div class="border">
-                                    {% if other_version_list is not empty %}
-                                        <div class="p-3 border-bottom">
-                                            <p>Other versions of this page:</p>
+                                <div class="accordion" id="accordionSide">
+                                    <div class="card">
+                                        <div class="card-header p-0" id="headingPageTree">
+                                            <span class="d-inline-block p-2 align-middle">
+                                                <i class="fas fa-stream fa-fw"></i>
+                                            </span>
 
-                                            {{ navigation.show(page, other_version_list) }}
+                                            <button class="btn btn-link p-2" type="button"
+                                                    data-toggle="collapse" data-target="#collapsePageTree"
+                                                    aria-expanded="true" aria-controls="collapsePageTree">
+                                                Full page tree
+                                            </button>
                                         </div>
-                                    {% endif %}
-                                    <div class="p-3">
-                                        <p>Full page tree:</p>
-
-                                        {{ navigation.show(page, [
-                                            root,
-                                        ], true) }}
+                                        <div id="collapsePageTree" class="collapse show"
+                                             aria-labelledby="headingPageTree">
+                                            <div class="card-body p-2">
+                                                {{ navigation.show(page, [
+                                                    root,
+                                                ], true) }}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="p-3 border-top">
-                                        This page was generated on {{ date|date('F d, Y') }}.
+                                    <div class="card">
+                                        <div class="card-header p-3">
+                                            This page was generated on <em>{{ date|date('F d, Y') }}</em>.
+                                        </div>
                                     </div>
                                 </div>
+                                {% if other_version_list is not empty %}
+                                    <div class="card">
+                                        <div class="card-header p-0" id="headingOtherVersion">
+                                                <span class="d-inline-block p-2 align-middle">
+                                                    <i class="fas fa-list-ol fa-fw"></i>
+                                                </span>
+                                            <button class="btn btn-link p-2" type="button" data-toggle="collapse"
+                                                    data-target="#collapseOtherVersion" aria-expanded="true"
+                                                    aria-controls="collapseOtherVersion">
+                                                Other versions of this page
+                                            </button>
+                                        </div>
+
+                                        <div id="collapseOtherVersion" class="collapse show"
+                                             aria-labelledby="headingOtherVersion">
+                                            <div class="card-body p-2">
+                                                {{ navigation.show(page, other_version_list, false) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             {% endblock %}
                         </div>
                     </div>
@@ -70,6 +100,8 @@
                     </div>
                 </div>
             </main>
+
+            {% include 'image/github-corner.html.twig' %}
         </div>
     {% endblock %}
 
