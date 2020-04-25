@@ -55,40 +55,40 @@
                                         </div>
                                         <div id="collapsePageTree" class="collapse show"
                                              aria-labelledby="headingPageTree">
-                                            <div class="card-body p-2">
+                                            <div class="card-body p-2 pl-3">
                                                 {{ navigation.show(page, [
                                                     root,
                                                 ], true) }}
                                             </div>
                                         </div>
                                     </div>
+                                    {% if other_version_list is not empty %}
+                                        <div class="card">
+                                            <div class="card-header p-0" id="headingOtherVersion">
+                                                <span class="d-inline-block p-2 align-middle">
+                                                    <i class="fas fa-list-ol fa-fw"></i>
+                                                </span>
+                                                <button class="btn btn-link p-2 collapsed" type="button" data-toggle="collapse"
+                                                        data-target="#collapseOtherVersion" aria-expanded="false"
+                                                        aria-controls="collapseOtherVersion">
+                                                    Other versions of this page
+                                                </button>
+                                            </div>
+
+                                            <div id="collapseOtherVersion" class="collapse"
+                                                 aria-labelledby="headingOtherVersion">
+                                                <div class="card-body p-2 pl-3">
+                                                    {{ navigation.show(page, other_version_list, false) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                     <div class="card">
                                         <div class="card-header p-3">
                                             This page was generated on <em>{{ date|date('F d, Y') }}</em>.
                                         </div>
                                     </div>
                                 </div>
-                                {% if other_version_list is not empty %}
-                                    <div class="card">
-                                        <div class="card-header p-0" id="headingOtherVersion">
-                                                <span class="d-inline-block p-2 align-middle">
-                                                    <i class="fas fa-list-ol fa-fw"></i>
-                                                </span>
-                                            <button class="btn btn-link p-2" type="button" data-toggle="collapse"
-                                                    data-target="#collapseOtherVersion" aria-expanded="true"
-                                                    aria-controls="collapseOtherVersion">
-                                                Other versions of this page
-                                            </button>
-                                        </div>
-
-                                        <div id="collapseOtherVersion" class="collapse show"
-                                             aria-labelledby="headingOtherVersion">
-                                            <div class="card-body p-2">
-                                                {{ navigation.show(page, other_version_list, false) }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
                             {% endblock %}
                         </div>
                     </div>
